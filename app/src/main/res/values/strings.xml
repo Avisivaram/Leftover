@@ -1,0 +1,31 @@
+<resources>
+    <string name="app_name">FoodTricks</string>
+    <string name="action_settings">Settings</string>
+    <string name="foodtricks">NOT HOTDOG + i love ido</string>
+
+    <string name="title_activity_welcome">Home Screen</string>
+    <string name="next">NEXT</string>
+    <string name="skip">SKIP</string>
+    <string name="start">GOT IT</string>
+
+    <string name="slide_1_title">Hello Food!</string>
+    <string name="slide_1_desc">The easiest way to fix yourself a quick meal</string>
+
+    <string name="slide_2_title">Few clicks</string>
+    <string name="slide_2_desc">Click on the ingredients you have\n\n
+Done?\n\n
+Press the button to find recipes!</string>
+
+    <string name="slide_3_title">Any regrets?</string>
+    <string name="slide_3_desc">Use the button to start over</string>
+    <string-array name="Animals">
+        <item>Select Animal!!</item>
+        <item>Lion</item>
+        <item>Tiger</item>
+        <item>Elephant</item>
+        <item>Zebra</item>
+        <item>Giraffe</item>
+        <item>Deer</item>
+    </string-array>
+
+</resources>
