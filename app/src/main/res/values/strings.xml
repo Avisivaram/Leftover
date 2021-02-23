@@ -19,4 +19,14 @@ Press the button to find recipes!</string>
     <string name="slide_3_title">Any regrets?</string>
     <string name="slide_3_desc">Use the button to start over</string>
 
+    <string-array name="Animals">
+        <item>Select Animal!!</item>
+        <item>Lion</item>
+        <item>Tiger</item>
+        <item>Elephant</item>
+        <item>Zebra</item>
+        <item>Giraffe</item>
+        <item>Deer</item>
+    </string-array>
+
 </resources>

@@ -1,4 +1,4 @@
-package com.insignia.leftover;
+package com.insignia.leftover.Recipe;
 
 import android.graphics.Color;
 import android.os.Build;
@@ -9,6 +9,9 @@ import android.view.WindowManager;
 import android.widget.ListView;
 
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.insignia.leftover.Home.ChooseIngredients;
+import com.insignia.leftover.R;
 
 import org.json.JSONException;
 

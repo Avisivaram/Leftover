@@ -1,4 +1,4 @@
-package com.insignia.leftover;
+package com.insignia.leftover.OnBoard;
 
 
 import android.content.Context;

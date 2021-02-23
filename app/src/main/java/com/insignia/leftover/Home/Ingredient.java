@@ -1,4 +1,4 @@
-package com.insignia.leftover;
+package com.insignia.leftover.Home;
 
 public class Ingredient {
 

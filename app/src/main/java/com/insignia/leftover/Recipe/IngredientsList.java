@@ -1,4 +1,4 @@
-package com.insignia.leftover;
+package com.insignia.leftover.Recipe;
 
 import java.io.Serializable;
 import java.util.ArrayList;

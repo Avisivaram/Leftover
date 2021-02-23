@@ -1,4 +1,6 @@
-package com.insignia.leftover;
+package com.insignia.leftover.Recipe;
+
+import com.insignia.leftover.Recipe.Recipe;
 
 public class RecipeCard {
 //    private String url;
@@ -11,7 +13,7 @@ public class RecipeCard {
 
     private Recipe recipe;
 
-    RecipeCard(Recipe recipe) {
+    public RecipeCard(Recipe recipe) {
         this.recipe = recipe;
     }
 

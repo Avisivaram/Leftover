@@ -1,11 +1,10 @@
-package com.insignia.leftover;
-
-import android.os.AsyncTask;
+package com.insignia.leftover.Recipe;
 
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
+import com.insignia.leftover.Recipe.Recipe;
 
 import org.json.JSONException;
 

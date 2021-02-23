@@ -1,4 +1,4 @@
-package com.insignia.leftover;
+package com.insignia.leftover.OnBoard;
 
 
 import android.content.Context;
@@ -19,6 +19,9 @@ import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.viewpager.widget.PagerAdapter;
 import androidx.viewpager.widget.ViewPager;
+
+import com.insignia.leftover.Home.ChooseIngredients;
+import com.insignia.leftover.R;
 
 public class WelcomeActivity extends AppCompatActivity {
 

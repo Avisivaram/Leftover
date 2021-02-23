@@ -1,9 +1,8 @@
-package com.insignia.leftover;
+package com.insignia.leftover.Recipe;
 
 import android.content.Context;
 
 import android.content.Intent;
-import android.net.Uri;
 
 import android.os.Build;
 import android.util.Log;
@@ -11,11 +10,18 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.RequiresApi;
 
+import com.insignia.leftover.Favourites.FavActivity;
+import com.insignia.leftover.Favourites.FavData;
+import com.insignia.leftover.Favourites.RoomFavDB;
+import com.insignia.leftover.R;
+import com.insignia.leftover.WebViewActivity;
 import com.nostra13.universalimageloader.cache.memory.impl.WeakMemoryCache;
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
@@ -24,6 +30,7 @@ import com.nostra13.universalimageloader.core.assist.ImageScaleType;
 import com.nostra13.universalimageloader.core.display.FadeInBitmapDisplayer;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 /**
@@ -36,13 +43,18 @@ public class CustomListAdapter  extends ArrayAdapter<RecipeCard> {
 
     private Context mContext;
     private int mResource;
-
+    int fav_on;
+    String descriptionText;
+    RoomFavDB db = RoomFavDB.getInstance(getContext());
+    List<FavData> favDataList ;
     /**
      * Holds variables in a View
      */
     private static class ViewHolder {
+
         TextView title;
         ImageView image;
+        ImageButton imgButton;
         TextView description;
     }
 
@@ -66,11 +78,11 @@ public class CustomListAdapter  extends ArrayAdapter<RecipeCard> {
         setupImageLoader();
 
         //get the information
-        String title = Objects.requireNonNull(getItem(position)).getTitle();
-        String imgUrl = Objects.requireNonNull(getItem(position)).getImageURL();
+        final String title = Objects.requireNonNull(getItem(position)).getTitle();
+        final String imgUrl = Objects.requireNonNull(getItem(position)).getImageURL();
         final String url = Objects.requireNonNull(getItem(position)).getRecipeURL();
-        int duration = Objects.requireNonNull(getItem(position)).getDuration();
-        int difficulty = (int) Objects.requireNonNull(getItem(position)).getDifficulty();
+        final int duration = Objects.requireNonNull(getItem(position)).getDuration();
+        final int difficulty = (int) Objects.requireNonNull(getItem(position)).getDifficulty();
 
 
         try{
@@ -80,8 +92,8 @@ public class CustomListAdapter  extends ArrayAdapter<RecipeCard> {
             final View result;
 
             //ViewHolder object
-            ViewHolder holder;
-
+            final ViewHolder holder;
+            fav_on=0;
             if(convertView == null){
                 LayoutInflater inflater = LayoutInflater.from(mContext);
                 convertView = inflater.inflate(mResource, parent, false);
@@ -90,7 +102,7 @@ public class CustomListAdapter  extends ArrayAdapter<RecipeCard> {
                 holder.title = convertView.findViewById(R.id.cardTitle);
                 holder.image = convertView.findViewById(R.id.cardImage);
                 holder.description = convertView.findViewById(R.id.cardDescription);
-
+                holder.imgButton = convertView.findViewById(R.id.fav);
                 result = convertView;
 
                 convertView.setTag(holder);
@@ -100,12 +112,35 @@ public class CustomListAdapter  extends ArrayAdapter<RecipeCard> {
                 result = convertView;
             }
 
+            favDataList = db.favDao().getAll();
+            for(int x=0 ; x < favDataList.size() ; x++){
+                if(title.equals(favDataList.get(x).getTitle())){
+                    holder.imgButton.setImageResource(R.drawable.ic_baseline_star_24);
+                    fav_on++;
+                }
+            }
             result.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Intent browserIntent = new Intent(v.getContext(),WebViewActivity.class);
+                    Intent browserIntent = new Intent(v.getContext(), WebViewActivity.class);
                     browserIntent.putExtra("url",url);
                     mContext.startActivity(browserIntent);
+                }
+            });
+            holder.imgButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if( fav_on == 0){
+                        holder.imgButton.setImageResource(R.drawable.ic_baseline_star_24);
+                        fav_on++;
+                        FavData favData = new FavData(title,imgUrl,url,duration,difficulty);
+                        db.favDao().insert(favData);
+                    }else{
+                        holder.imgButton.setImageResource(R.drawable.ic_baseline_star_border_24);
+                        db.favDao().delTitle(title);
+                        fav_on--;
+                    }
+
                 }
             });
 
@@ -116,7 +151,7 @@ public class CustomListAdapter  extends ArrayAdapter<RecipeCard> {
 //            lastPosition = position;
 
             holder.title.setText(title);
-            String descriptionText = "Recipe Difficulty: " + difficulty;
+            descriptionText = "Recipe Difficulty: " + difficulty;
             int hours = duration / 60;
             int minutes = duration % 60;
             String secondDigit = "";

@@ -1,4 +1,4 @@
-package com.insignia.leftover;
+package com.insignia.leftover.Recipe;
 
 import com.google.gson.JsonObject;
 
@@ -18,7 +18,7 @@ public class Recipe {
         return difficulty;
     }
 
-    Recipe(JsonObject recipe_json) {
+    public Recipe(JsonObject recipe_json) {
         JsonObject recipe_elem = (JsonObject) recipe_json.get("recipe");
         this.title = recipe_elem.get("label").getAsString();
         this.url = recipe_elem.get("url").getAsString();
@@ -48,5 +48,11 @@ public class Recipe {
 //        RecipesFactory.getRecipes(url);
     }
 
-
+    public Recipe(String title, String imageUrl, String url, int duration, double difficulty) {
+        this.title = title;
+        this.imageUrl = imageUrl;
+        this.url = url;
+        this.duration = duration;
+        this.difficulty = difficulty;
+    }
 }

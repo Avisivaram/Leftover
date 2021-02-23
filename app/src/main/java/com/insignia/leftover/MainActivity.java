@@ -5,7 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
-import com.insignia.leftover.WelcomeActivity;
+import com.insignia.leftover.OnBoard.WelcomeActivity;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -22,6 +22,6 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(i);
                 finish();
             }
-        }, 500);
+        }, 1500);
     }
 }

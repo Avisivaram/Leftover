@@ -1,4 +1,4 @@
-package com.insignia.leftover;
+package com.insignia.leftover.Home;
 
 import android.content.Context;
 import android.graphics.Typeface;
@@ -9,7 +9,8 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import java.util.ArrayList;
+import com.insignia.leftover.R;
+
 import java.util.Arrays;
 import java.util.HashMap;
 
@@ -21,53 +22,22 @@ public class ImageAdapter extends BaseAdapter {
     private Context mContext;
     private static int INGREDIENT_TEXT_SIZE = 14;
 
-    private static Ingredient[] ingredients = {
-            new Ingredient(R.drawable.pasta, "Pasta"),
-            new Ingredient(R.drawable.rice, "Rice"),
-            new Ingredient(R.drawable.potatoes, "Potatoes"),
-            new Ingredient(R.drawable.flour, "Flour"),
-            new Ingredient(R.drawable.cheese, "Cheese"),
-            new Ingredient(R.drawable.beef, "Beef"),
-            new Ingredient(R.drawable.chicken, "Chicken"),
-            new Ingredient(R.drawable.fish, "Fish"),
-            new Ingredient(R.drawable.eggs, "Eggs"),
-            new Ingredient(R.drawable.beans, "Beans"),
-            new Ingredient(R.drawable.broccoli, "Broccoli"),
-            new Ingredient(R.drawable.carrot, "Carrot"),
-            new Ingredient(R.drawable.cauliflower, "Cauliflower"),
-            new Ingredient(R.drawable.leek, "Leek"),
-            new Ingredient(R.drawable.mushroom, "Mushroom"),
-            new Ingredient(R.drawable.sausage, "Sausage"),
-            new Ingredient(R.drawable.tomato, "Tomato"),
-            new Ingredient(R.drawable.avocado, "Avocado"),
-            new Ingredient(R.drawable.bell_pepper, "Bell Pepper"),
-            new Ingredient(R.drawable.cabbage, "Cabbage"),
-            new Ingredient(R.drawable.lettuce, "Lettuce"),
-            new Ingredient(R.drawable.cucumber, "Cucumber"),
-            new Ingredient(R.drawable.spinach, "Spinach"),
-            new Ingredient(R.drawable.bacon, "Bacon"),
-            new Ingredient(R.drawable.butter, "Butter"),
-            new Ingredient(R.drawable.olive_oil, "Olive Oil"),
-            new Ingredient(R.drawable.onion, "Onion"),
-            new Ingredient(R.drawable.garlic, "Garlic"),
-            new Ingredient(R.drawable.chili, "Chili"),
-            new Ingredient(R.drawable.lemon, "Lemon"),
-            new Ingredient(R.drawable.ginger, "Ginger"),
-            new Ingredient(R.drawable.grapes, "Grapes"),
-            new Ingredient(R.drawable.apple, "Apple")
-    };
+    private static Ingredient[] ingredients ;
 
 
-    static final int INGREDIENTS_AMOUNT = ingredients.length;
+    static int INGREDIENTS_AMOUNT;
 
     private HashMap<Integer, String> ingredientsConversionMap = new HashMap<>();
 
 
-    private boolean[] isPressed = new boolean[INGREDIENTS_AMOUNT];
+    private boolean[] isPressed;
 
 
-    public ImageAdapter(Context c) {
+    public ImageAdapter(Context c,Ingredient[] arrList) {
         mContext = c;
+        ingredients = arrList;
+        INGREDIENTS_AMOUNT = ingredients.length;
+        isPressed =  new boolean[INGREDIENTS_AMOUNT];
         Arrays.fill(isPressed, Boolean.FALSE);
         initializeConversionMap();
     }
@@ -125,6 +95,10 @@ public class ImageAdapter extends BaseAdapter {
         for (int i = 0; i < INGREDIENTS_AMOUNT; ++i) {
             ingredientsConversionMap.put(i, ingredients[i].getName());
         }
+    }
+    public void swapItems(Ingredient[] itemsList){
+        ingredients = itemsList.clone();
+        notifyDataSetChanged();
     }
 
 }
